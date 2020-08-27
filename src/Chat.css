@@ -40,5 +40,60 @@
   overflow-y: auto;
 }
 
-.chat__input {
+.chat__body-text {
+  font-size: 16px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+  position: relative;
+  /* display: inline-block; */
+  margin-bottom: 30px;
+}
+
+.chat__body-name {
+  position: absolute;
+  top: -15px;
+  /* left: 0; */
+  width: fit-content;
+  font-size: xx-small;
+  font-weight: 800;
+}
+
+.chat__body-timestamp {
+  margin-left: 10px;
+  font-size: xx-small;
+}
+
+.chat__body-text--reciever {
+  margin-left: auto;
+  background-color: #dcf8c6;
+}
+
+.chat__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 62px;
+  border-top: 1px solid lightgray;
+}
+
+.chat__footer-form {
+  display: flex;
+  flex: 1;
+}
+
+.chat__footer-form > input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.chat__footer-form > button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding-left: 10px;
 }

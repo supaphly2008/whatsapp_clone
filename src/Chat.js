@@ -4,6 +4,8 @@ import { Avatar, IconButton } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
+import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
+import MicIcon from "@material-ui/icons/Mic";
 
 const Chat = () => {
   const [seed, setSeed] = useState("");
@@ -11,6 +13,11 @@ const Chat = () => {
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 5000));
   }, []);
+
+  const sendMessage = (e) => {
+    e.preventDefault();
+    console.log("send");
+  };
 
   return (
     <div className="chat">
@@ -33,8 +40,32 @@ const Chat = () => {
           </IconButton>
         </div>
       </div>
-      <div className="chat__body"></div>
-      <div className="chat__input"></div>
+      <div className="chat__body">
+        <p className={`chat__body-text ${false && "chat__body-text--reciever"}`}>
+          <span className="chat__body-name">Terry Liao</span>
+          Hey Guys
+          <span className="chat__body-timestamp">18:34</span>
+        </p>
+        <p className={`chat__body-text ${true && "chat__body-text--reciever"}`}>
+          <span className="chat__body-name">Terry Liao</span>
+          Hey Guys
+          <span className="chat__body-timestamp">18:34</span>
+        </p>
+      </div>
+      <div className="chat__footer">
+        <IconButton>
+          <EmojiEmotionsIcon />
+        </IconButton>
+        <form className="chat__footer-form">
+          <input placeholder="Type a message..." type="text" />
+          <button onClick={sendMessage} type="submit">
+            Send
+          </button>
+        </form>
+        <IconButton>
+          <MicIcon />
+        </IconButton>
+      </div>
     </div>
   );
 };
