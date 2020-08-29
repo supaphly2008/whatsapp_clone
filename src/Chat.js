@@ -6,25 +6,37 @@ import SearchIcon from "@material-ui/icons/Search";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import EmojiEmotionsIcon from "@material-ui/icons/EmojiEmotions";
 import MicIcon from "@material-ui/icons/Mic";
+import { useParams } from "react-router-dom";
+import database from "./firebase";
 
 const Chat = () => {
-  const [seed, setSeed] = useState("");
+  const [input, setInput] = useState("");
+  const [roomName, setRoomName] = useState("");
+  const { roomId } = useParams();
 
   useEffect(() => {
-    setSeed(Math.floor(Math.random() * 5000));
-  }, []);
+    // select rooms collection with a document {roomId} and get the data of the selected id
+    database
+      .collection("rooms")
+      .doc(roomId)
+      .onSnapshot((snapshot) => setRoomName(snapshot.data().name));
+  }, [roomId]);
+
+  const onInputChange = (e) => {
+    setInput(e.target.value);
+  };
 
   const sendMessage = (e) => {
     e.preventDefault();
-    console.log("send");
+    setInput("");
   };
 
   return (
     <div className="chat">
       <div className="chat__header">
-        <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+        <Avatar src={`https://avatars.dicebear.com/api/human/${roomId}.svg`} />
         <div className="chat__header-info">
-          <h3>Room name</h3>
+          <h3>{roomName}</h3>
           <p>last seen...</p>
         </div>
 
@@ -57,7 +69,7 @@ const Chat = () => {
           <EmojiEmotionsIcon />
         </IconButton>
         <form className="chat__footer-form">
-          <input placeholder="Type a message..." type="text" />
+          <input value={input} onChange={onInputChange} placeholder="Type a message..." type="text" />
           <button onClick={sendMessage} type="submit">
             Send
           </button>
