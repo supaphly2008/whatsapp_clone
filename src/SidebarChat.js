@@ -5,11 +5,6 @@ import database from "./firebase";
 import { Link } from "react-router-dom";
 
 const SidebarChat = ({ addNewChat, name, id }) => {
-  // const [seed, setSeed] = useState("");
-  // useEffect(() => {
-  //   setSeed(Math.floor(Math.random() * 5000));
-  // }, []);
-
   const createChat = () => {
     const roomName = prompt("Please enter name for chat");
     console.log(roomName);
